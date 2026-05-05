@@ -34,7 +34,7 @@
 
   /* HERO HEADER */
   .hero {
-    background: linear-gradient(160deg, #2d5a3d 0%, #4a7c59 50%, #2d7d7d 100%);
+    background: url('banner.jpg') center 40% / cover no-repeat, #1e3d2a;
     padding: 48px 24px 64px;
     text-align: center;
     position: relative;
@@ -45,9 +45,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background-image:
-      radial-gradient(circle at 20% 50%, rgba(255,255,255,0.05) 0%, transparent 50%),
-      radial-gradient(circle at 80% 20%, rgba(255,255,255,0.04) 0%, transparent 40%);
+    background: linear-gradient(160deg, rgba(30,61,42,0.78) 0%, rgba(45,125,125,0.65) 100%);
   }
 
   .hero-logo {
@@ -762,18 +760,18 @@
           <input type="date" id="dob">
         </div>
       </div>
-      <div class="field-group triple">
-        <div class="field">
-          <label>Height</label>
-          <input type="text" id="height" placeholder="e.g. 170 cm">
-        </div>
-        <div class="field">
-          <label>Weight</label>
-          <input type="text" id="weight" placeholder="e.g. 65 kg">
-        </div>
+      <div class="field-group">
         <div class="field">
           <label>Nationality</label>
           <input type="text" id="nationality" placeholder="Country">
+        </div>
+        <div class="field">
+          <label>Room Type</label>
+          <select id="roomType">
+            <option value="">Select room type</option>
+            <option value="Double Bed">Double Bed</option>
+            <option value="Twin Beds">Twin Beds</option>
+          </select>
         </div>
       </div>
 
@@ -787,6 +785,25 @@
         <div class="radio-pill" onclick="selectRadio('genderGroup', this, 'gender', 'Other')">Other</div>
       </div>
       <input type="hidden" id="gender" value="">
+
+      <div class="divider"></div>
+
+      <div class="field-section-label">Occupancy</div>
+      <div class="radio-group" id="occupancyGroup">
+        <div class="radio-pill" onclick="selectRadio('occupancyGroup', this, 'occupancy', 'Shared')">Shared</div>
+        <div class="radio-pill" onclick="selectRadio('occupancyGroup', this, 'occupancy', 'Single')">Single</div>
+      </div>
+      <input type="hidden" id="occupancy" value="">
+
+      <div class="divider"></div>
+
+      <div class="field-section-label">Payment Method</div>
+      <div class="radio-group" id="paymentGroup">
+        <div class="radio-pill" onclick="selectRadio('paymentGroup', this, 'paymentMethod', 'Bank Transfer')">Bank Transfer</div>
+        <div class="radio-pill" onclick="selectRadio('paymentGroup', this, 'paymentMethod', 'Credit / Debit Card')">Credit / Debit Card</div>
+        <div class="radio-pill" onclick="selectRadio('paymentGroup', this, 'paymentMethod', 'Cash on Arrival')">Cash on Arrival</div>
+      </div>
+      <input type="hidden" id="paymentMethod" value="">
 
       <div class="divider"></div>
 
@@ -1228,9 +1245,10 @@
       fullName:           document.getElementById('fullName').value.trim(),
       nickname:           document.getElementById('nickname').value.trim(),
       dateOfBirth:        document.getElementById('dob').value,
-      height:             document.getElementById('height').value.trim(),
-      weight:             document.getElementById('weight').value.trim(),
       nationality:        document.getElementById('nationality').value.trim(),
+      roomType:           document.getElementById('roomType').value,
+      occupancy:          document.getElementById('occupancy').value,
+      paymentMethod:      document.getElementById('paymentMethod').value,
       gender:             document.getElementById('gender').value,
       phone:              document.getElementById('phone').value.trim(),
       email:              document.getElementById('email').value.trim(),
