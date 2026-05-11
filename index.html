@@ -756,9 +756,17 @@
       <div class="radio-group" id="paymentGroup">
         <div class="radio-pill" onclick="selectRadio('paymentGroup', this, 'paymentMethod', 'Bank Transfer')">Bank Transfer</div>
         <div class="radio-pill" onclick="selectRadio('paymentGroup', this, 'paymentMethod', 'Credit / Debit Card')">Credit / Debit Card</div>
-        <div class="radio-pill" onclick="selectRadio('paymentGroup', this, 'paymentMethod', 'Cash on Arrival')">Cash on Arrival</div>
       </div>
       <input type="hidden" id="paymentMethod" value="">
+
+      <div class="divider"></div>
+
+      <div class="field-section-label">Retreat Date</div>
+      <div class="radio-group" id="retreatDateGroup">
+        <div class="radio-pill" onclick="selectRadio('retreatDateGroup', this, 'retreatDate', '24 - 27 July 2026')">24 – 27 July 2026</div>
+        <div class="radio-pill" onclick="selectRadio('retreatDateGroup', this, 'retreatDate', '23 - 26 October 2026')">23 – 26 October 2026</div>
+      </div>
+      <input type="hidden" id="retreatDate" value="">
 
       <div class="divider"></div>
 
@@ -889,7 +897,7 @@
           <div class="goal-check"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
           <span class="goal-text">Emotional healing</span>
         </div>
-        <div class="goal-card" onclick="toggleCard(this,'goals')">
+        <div class="goal-card" onclick="toggleCard(this,'goals')q">
           <div class="goal-check"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
           <span class="goal-text">Improve flexibility or mobility</span>
         </div>
@@ -897,7 +905,7 @@
           <div class="goal-check"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
           <span class="goal-text">Detox or cleanse</span>
         </div>
-        <div class="goal-card" onclick="toggleCard(this,'goals')">
+        <div class="goal-card" onclick="toggleCard(this,'goals';)">
           <div class="goal-check"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
           <span class="goal-text">Rejuvenate from travel fatigue</span>
         </div>
@@ -905,7 +913,7 @@
           <div class="goal-check"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
           <span class="goal-text">Try something new</span>
         </div>
-        <div class="goal-card" onclick="toggleCard(this,'goals')">
+        <div class="goal-card" onclick="toggleCard(this,'goals';)">
           <div class="goal-check"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
           <span class="goal-text">Learn about holistic health</span>
         </div>
@@ -1080,7 +1088,7 @@
 
       <div class="consent-item" onclick="toggleConsent(this, 'consent2')">
         <div class="consent-check">
-          <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2.5 6.5l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2.5 6.5l3 3 5-5" stroke-width="1.8" stroke-linecap="round"/></svg>
         </div>
         <span class="consent-text">I agree to take full responsibility for my own physical and mental well-being during all sessions and activities at the resort.</span>
       </div>
@@ -1204,6 +1212,7 @@
       roomType:           document.getElementById('roomType').value,
       occupancy:          document.getElementById('occupancy').value,
       paymentMethod:      document.getElementById('paymentMethod').value,
+      retreatDate:        document.getElementById('retreatDate').value,
       gender:             document.getElementById('gender').value,
       phone:              document.getElementById('phone').value.trim(),
       email:              document.getElementById('email').value.trim(),
