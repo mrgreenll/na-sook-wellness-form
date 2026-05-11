@@ -661,10 +661,43 @@
     .activity-grid { grid-template-columns: 1fr 1fr; }
   }
 
+  /* PRINT SUMMARY */
+  #printSummary {
+    display: none;
+    font-family: 'Georgia', serif;
+    color: #2c2c2a;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 32px 24px;
+  }
+  #printSummary h1 { font-size: 20px; font-weight: normal; margin-bottom: 4px; color: #2c3e5c; }
+  #printSummary .ps-sub { font-size: 13px; color: #6b6b67; font-style: italic; margin-bottom: 28px; }
+  #printSummary .ps-section { margin-bottom: 20px; border-bottom: 1px solid #e2ddd8; padding-bottom: 16px; }
+  #printSummary .ps-section:last-child { border-bottom: none; }
+  #printSummary .ps-section h2 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.8px; color: #6b6b67; font-family: 'Helvetica Neue', sans-serif; margin-bottom: 10px; }
+  #printSummary .ps-row { display: flex; gap: 8px; margin-bottom: 6px; font-size: 14px; }
+  #printSummary .ps-label { color: #6b6b67; min-width: 160px; font-family: 'Helvetica Neue', sans-serif; flex-shrink: 0; }
+  #printSummary .ps-val { color: #2c2c2a; }
+  #printSummary .ps-footer { margin-top: 24px; font-size: 12px; color: #9a9a96; font-style: italic; }
+
+  /* DOB dropdown shared style */
+  .dob-select {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 10px;
+    font-size: 15px;
+    font-family: 'Georgia', serif;
+    color: var(--text);
+    background: var(--sand-light);
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+  .dob-select:focus { border-color: var(--sage); background: var(--white); }
+
   @media print {
-    .nav-row, .progress-bar-wrap, .hero, .hero-sub { display: none; }
-    .section { display: block !important; }
-    .card { break-inside: avoid; }
+    body > *:not(#printSummary) { display: none !important; }
+    #printSummary { display: block !important; }
   }
 </style>
 </head>
@@ -712,7 +745,12 @@
         </div>
         <div class="field">
           <label>Date of Birth</label>
-          <input type="date" id="dob">
+          <div style="display:flex;gap:6px">
+            <select id="dobDay" class="dob-select" onchange="updateDob()" style="flex:1"><option value="">DD</option></select>
+            <select id="dobMonth" class="dob-select" onchange="updateDob()" style="flex:2"><option value="">Month</option></select>
+            <select id="dobYear" class="dob-select" onchange="updateDob()" style="flex:1.8"><option value="">YYYY</option></select>
+          </div>
+          <input type="hidden" id="dob" value="">
         </div>
       </div>
       <div class="field-group">
@@ -897,7 +935,7 @@
           <div class="goal-check"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
           <span class="goal-text">Emotional healing</span>
         </div>
-        <div class="goal-card" onclick="toggleCard(this,'goals')q">
+        <div class="goal-card" onclick="toggleCard(this,'goals')">
           <div class="goal-check"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
           <span class="goal-text">Improve flexibility or mobility</span>
         </div>
@@ -905,7 +943,7 @@
           <div class="goal-check"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
           <span class="goal-text">Detox or cleanse</span>
         </div>
-        <div class="goal-card" onclick="toggleCard(this,'goals';)">
+        <div class="goal-card" onclick="toggleCard(this,'goals')">
           <div class="goal-check"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
           <span class="goal-text">Rejuvenate from travel fatigue</span>
         </div>
@@ -913,7 +951,7 @@
           <div class="goal-check"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
           <span class="goal-text">Try something new</span>
         </div>
-        <div class="goal-card" onclick="toggleCard(this,'goals';)">
+        <div class="goal-card" onclick="toggleCard(this,'goals')">
           <div class="goal-check"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
           <span class="goal-text">Learn about holistic health</span>
         </div>
@@ -1088,7 +1126,7 @@
 
       <div class="consent-item" onclick="toggleConsent(this, 'consent2')">
         <div class="consent-check">
-          <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2.5 6.5l3 3 5-5" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2.5 6.5l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg>
         </div>
         <span class="consent-text">I agree to take full responsibility for my own physical and mental well-being during all sessions and activities at the resort.</span>
       </div>
@@ -1141,6 +1179,9 @@
   </div>
 
 </div>
+
+<!-- Print summary (hidden on screen, shown only on print) -->
+<div id="printSummary"></div>
 
 <script>
   // ── GOOGLE SHEETS BACKEND ──────────────────────────────────────────────────
@@ -1258,6 +1299,10 @@
     document.getElementById('progressBar').style.width = '100%';
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
+    // Build print summary so Print/Save as PDF works correctly
+    const formData = collectData();
+    document.getElementById('printSummary').innerHTML = buildPrintSummary(formData);
+
     // Send to Google Sheets via hidden form (avoids CORS redirect issues)
     if (SCRIPT_URL && SCRIPT_URL !== 'PASTE_YOUR_APPS_SCRIPT_URL_HERE') {
       try {
@@ -1285,6 +1330,90 @@
     const pct = ((parseInt(el.value) - 1) / 4) * 100;
     el.style.background = `linear-gradient(to right, #5a7faf ${pct}%, #e2ddd8 ${pct}%)`;
   });
+
+  // Populate DOB dropdowns (CE years, avoids BE calendar on Thai mobile)
+  (function() {
+    const dayEl = document.getElementById('dobDay');
+    const monthEl = document.getElementById('dobMonth');
+    const yearEl = document.getElementById('dobYear');
+    const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    for (let d = 1; d <= 31; d++) {
+      const o = document.createElement('option');
+      o.value = String(d).padStart(2,'0');
+      o.textContent = String(d).padStart(2,'0');
+      dayEl.appendChild(o);
+    }
+    months.forEach((m, i) => {
+      const o = document.createElement('option');
+      o.value = String(i+1).padStart(2,'0');
+      o.textContent = m;
+      monthEl.appendChild(o);
+    });
+    const currentYear = new Date().getFullYear();
+    for (let y = currentYear - 10; y >= currentYear - 100; y--) {
+      const o = document.createElement('option');
+      o.value = y;
+      o.textContent = y;
+      yearEl.appendChild(o);
+    }
+  })();
+
+  function updateDob() {
+    const d = document.getElementById('dobDay').value;
+    const m = document.getElementById('dobMonth').value;
+    const y = document.getElementById('dobYear').value;
+    document.getElementById('dob').value = (d && m && y) ? `${y}-${m}-${d}` : '';
+  }
+
+  // Build print summary from collected data
+  function buildPrintSummary(data) {
+    const r = (label, val) => val ? `<div class="ps-row"><span class="ps-label">${label}</span><span class="ps-val">${val}</span></div>` : '';
+    return `
+      <h1>Na Sook Wellness — Guest Questionnaire</h1>
+      <div class="ps-sub">Submitted ${data.submittedAt}</div>
+      <div class="ps-section">
+        <h2>Personal Information</h2>
+        ${r('Full Name', data.fullName)}
+        ${r('Preferred Name', data.nickname)}
+        ${r('Date of Birth', data.dateOfBirth)}
+        ${r('Nationality', data.nationality)}
+        ${r('Room Type', data.roomType)}
+        ${r('Occupancy', data.occupancy)}
+        ${r('Payment Method', data.paymentMethod)}
+        ${r('Retreat Date', data.retreatDate)}
+        ${r('Gender', data.gender)}
+        ${r('Phone / WhatsApp', data.phone)}
+        ${r('Email', data.email)}
+      </div>
+      <div class="ps-section">
+        <h2>Current State</h2>
+        ${r('Energy Level', data.energyLevel)}
+        ${r('Stress Level', data.stressLevel)}
+        ${r('Sleep Quality', data.sleepQuality)}
+      </div>
+      <div class="ps-section">
+        <h2>Goals &amp; Preferences</h2>
+        ${r('Wellness Goals', data.wellnessGoals)}
+        ${r('Activities', data.activities)}
+        ${r('Dietary Preferences', data.dietaryPreferences)}
+      </div>
+      <div class="ps-section">
+        <h2>Health &amp; Medical</h2>
+        ${r('Medical Conditions', data.medicalConditions)}
+        ${r('Pregnant', data.pregnant)}
+        ${r('Allergies', data.allergies)}
+        ${r('Allergy Details', data.allergyDetails)}
+        ${r('Medication', data.medication)}
+        ${r('Medication Details', data.medicationDetails)}
+      </div>
+      <div class="ps-section">
+        <h2>Consent</h2>
+        ${r('Digital Signature', data.signature)}
+        ${r('Date Signed', data.signatureDate)}
+      </div>
+      <div class="ps-footer">Na Sook Wellness Resort · Krabi, Thailand</div>
+    `;
+  }
 </script>
 <!-- Hidden form for Google Sheets submission (avoids CORS issues) -->
 <iframe name="hiddenIframe" style="display:none"></iframe>
